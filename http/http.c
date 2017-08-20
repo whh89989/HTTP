@@ -64,9 +64,39 @@ void print_log(const char *msg,int level)
 	};
 	printf("[%s][%s]\n",msg,level_msg[level]);
 }
+static void show_404(fd)
+{
+	const char *echo_header = "HTTP/1.0 404 Not Found!";
+	send(fd,echo_header,strlen(echo_header),0);
+	const char *type = "Content-Type:text/html;charset=ISO-8859-1\r\n";
+	send(fd,type,strlen(type),0);
+	const char *blank_line = "\r\n";
+	send(fd,blank_line,strlen(blank_line),0);
 
+	const char *msg = "<html><h1>Page Not Found!</h1></html>\r\n";
+	send(fd,msg,strlen(msg),0);
+}
 void echo_error(int fd,int errno_num)
 {
+	switch(errno_num){
+		case 400:
+			break;
+		case 401:
+			break;
+		case 403:
+			break;
+		case 404:
+			show_404(fd);
+			break;
+		case 500:
+			break;
+		case 501:
+			break;
+		case 503:
+			break;
+		default:
+			break;
+	}
 }
 
 int echo_www(int fd,const char*path,int size)
@@ -200,6 +230,7 @@ void* handler_request(void *arg)
     int errno_num = 200;
     int cgi = 0;
     char *query_string = NULL;
+
 #ifdef _DEBUG_
     printf("########################################\n");
 	char buff[SIZE];
