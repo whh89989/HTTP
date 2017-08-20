@@ -17,7 +17,7 @@ int main(int argc,char *argv[])
 	{
 		return 2;
 	}
-
+	//daemon(0,0);
 	while(1)
 	{
 		struct sockaddr_in client;

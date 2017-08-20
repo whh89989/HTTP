@@ -4,6 +4,8 @@
 #include <iostream>
 #include <mysql.h>
 #include <string>
+#include <string.h>
+#include <stdlib.h>
 
 using namespace std;
 class sql{
@@ -19,7 +21,7 @@ class sql{
 		int insert(const string &name,\
 				    const string &password,\
 					const string &id);
-
+		int select();
 		~sql();
 	private:
 		MYSQL *conn;

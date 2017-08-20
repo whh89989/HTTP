@@ -158,7 +158,7 @@ int exe_cgi(int fd,const char *method,\
         putenv(METHOD);//导出环境变量 
         if(strcasecmp(method,"GET") == 0)
         {
-            sprintf(QUERY_STRING,"QUERY_SREING=%s",query_string); 
+            sprintf(QUERY_STRING,"QUERY_STRING=%s",query_string); 
             putenv(QUERY_STRING);
         }else{
             sprintf(CONTENT_LENGTH,"CONTENT_LENGTH=%d",content_len);
